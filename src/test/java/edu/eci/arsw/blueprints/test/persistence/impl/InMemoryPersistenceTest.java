@@ -10,6 +10,8 @@ import edu.eci.arsw.blueprints.model.Point;
 import edu.eci.arsw.blueprints.persistence.BlueprintNotFoundException;
 import edu.eci.arsw.blueprints.persistence.BlueprintPersistenceException;
 import edu.eci.arsw.blueprints.persistence.impl.InMemoryBlueprintPersistence;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.junit.Test;
@@ -68,6 +70,44 @@ public class InMemoryPersistenceTest {
                 
         
     }
+    
+    @Test 
+    public void getBlueprintTest(){
+        InMemoryBlueprintPersistence ibpp=new InMemoryBlueprintPersistence();
+        Point[] pts=new Point[]{new Point(0, 0),new Point(10, 10)};
+        Blueprint bp=new Blueprint("john", "thepaint",pts);
+        try {
+            ibpp.saveBlueprint(bp);
+            Blueprint blueprint=ibpp.getBlueprint("john", "thepaint");
+            assertEquals(blueprint, bp);
+        } catch (BlueprintPersistenceException ex) {
+            fail("Blueprint persistence failed inserting the first blueprint.");
+        } catch (BlueprintNotFoundException e){
+            fail("Blueprint failed getting the blueprint");
+        }
+        
+    }
+    
+    @Test 
+    public void getBlueprintByAuthorTest(){
+        InMemoryBlueprintPersistence ibpp=new InMemoryBlueprintPersistence();
+        Point[] pts=new Point[]{new Point(0, 0),new Point(10, 10)};
+        Blueprint bp=new Blueprint("john", "thepaint",pts);
+        Point[] pts2=new Point[]{new Point(10, 10),new Point(20, 20)};
+        Blueprint bp2=new Blueprint("john", "thedoor",pts2);
+        try {
+            ibpp.saveBlueprint(bp);
+            ibpp.saveBlueprint(bp2);
+            Set<Blueprint> set =ibpp.getBlueprintByAuthor("john");
+            assertEquals(set.size(),2);
+        } catch (BlueprintPersistenceException ex) {
+            fail("Blueprint persistence failed inserting the blueprints.");
+        } catch (BlueprintNotFoundException e){
+            fail("Blueprint failed getting the blueprints");
+        }
+    }
+    
+    
 
 
     
