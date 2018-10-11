@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package edu.esi.arsw.blueprints.filters;
+package edu.eci.arsw.blueprints.filters;
 
 import edu.eci.arsw.blueprints.model.Blueprint;
 import edu.eci.arsw.blueprints.model.Point;
@@ -18,6 +18,7 @@ public class submuestreoFilter implements Filter{
 
     @Override
     public void filter(Blueprint bp) {
+        System.out.println("Submuestreo");
         List<Point> pts0=bp.getPoints();
         int i=0;
         ArrayList<Point> ps1 = new ArrayList();

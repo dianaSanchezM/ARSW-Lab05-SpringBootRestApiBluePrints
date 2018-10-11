@@ -16,12 +16,14 @@ import java.util.Iterator;
 import java.util.Set;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.stereotype.Service;
 
 /**
  *
  * @author diana
  */
 public class blueprintsCreator {
+    
     private static BlueprintsServices bp;
     
     public static void main(String args[]) throws BlueprintPersistenceException,BlueprintNotFoundException{
